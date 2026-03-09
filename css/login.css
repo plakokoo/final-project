@@ -1,0 +1,78 @@
+    body{
+      background:#f3f3f3;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family: 'Segoe UI', sans-serif;
+      }
+
+      .auth-container{
+      width:900px;
+      background:white;
+      border-radius:15px;
+      overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,0.1);
+      }
+
+      .form-section{
+      padding:50px;
+      }
+
+      .side-panel{
+      background:linear-gradient(135deg,#8e2de2,#4a00e0);
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:40px;
+      }
+
+      .form-control{
+      border-radius:30px;
+      padding:12px 20px;
+      }
+
+      .btn-purple{
+      background:#6a11cb;
+      background:linear-gradient(45deg,#8e2de2,#4a00e0);
+      border:none;
+      border-radius:30px;
+      padding:10px;
+      color:white;
+      font-weight:600;
+      }
+
+      .btn-purple:hover{
+      opacity:0.9;
+      }
+
+      h2{
+      font-weight:700;
+      }
+      
+      #error-message {
+        display: none;
+        color: #E74C3C;
+        background: none;  
+        padding: 0;        
+        margin-top: 8px;
+        border-radius: 0;   
+        font-size: 0.9rem;
+        text-align: left;   
+      }
+     
+
+      @media(max-width:768px){
+
+      .auth-container{
+      flex-direction:column;
+      width:95%;
+      }
+
+      .side-panel{
+      display:none;
+      }
+
+      }
