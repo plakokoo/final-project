@@ -1,4 +1,5 @@
 <?php
+session_set_cookie_params(0, '/');
 session_start();
 
 if(!isset($_SESSION['user_id'])) {
@@ -16,10 +17,7 @@ if(!isset($_SESSION['user_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SHIELDNET</title>
     <link rel="icon" type="image/x-icon" href="../assets/2.png" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
       rel="stylesheet"
@@ -66,7 +64,54 @@ if(!isset($_SESSION['user_id'])) {
         </div>
       </div>
     </nav>
+
+
+<div class="container mt-4">
+  <div class="row">
+
+    <div class="col-md-7">
+      <div class="card p-3">
+
+        <h5 class="text-center mb-3">
+        <span style="display:inline-block;width:18px;height:12px;background:#e0a04b;border-radius:3px;margin-right:8px;"></span>
+        <b>Door Status:</b> Loading...
+        </h5>
+      <div class="d-flex gap-3 justify-content-center mb-4  ">
+        <button class="btn btn-success flex-fill py-3 ">Unlock Door</button>
+        <button class="btn btn-danger flex-fill py-3">Lock Door</button>
+      </div>
+        <h5 class="mt-4">Access History</h5>
+        <table class="table">
+          <tr>
+            <th>Time</th>
+            <th>Action</th>
+          </tr>
+          <tr>
+            <td colspan="2" style="text-align: center;">No access history yet</td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <div class="card p-3">
+       <h5><i class="bi bi-person">  Profile </i></h5>
+        <p><b>Name: <?php echo htmlspecialchars($_SESSION['user_name']);?></b></p>
+        <p><b>Card ID: <?php echo htmlspecialchars($_SESSION['card_id']);?></b></p>
+
+        <hr>
+
+        <p>
+          Welcome! Manage access, monitor activity,
+          and control your smart lock system.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
   </body>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../js/profile.js"></script>
 </html>

@@ -4,7 +4,12 @@ header('Content-Type: application/json');
 require_once '../DB.php';
 
 
-date_default_timezone_set('UTC');
+date_default_timezone_set('Asia/Manila');
+
+function generateID() {
+    return random_int(10000000, 99999999);
+}
+
 
 $response = [
     'success' => false,
@@ -73,12 +78,16 @@ try {
 
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-    $stmt = $conn->prepare("INSERT INTO users (name, email, password_hash, created_at) VALUES (?, ?, ?, NOW())");
-    $stmt->bind_param("sss", $fullname, $email, $password_hash);
+    $card_id = generateID();
+
+    $stmt = $conn->prepare("INSERT INTO users (name, email, password_hash, card_id, created_at) VALUES (?, ?, ?, ?, NOW())");
+    $stmt->bind_param("ssss", $fullname, $email, $password_hash, $card_id);
 
     if($stmt->execute()) {
         $_SESSION['user_id'] = $conn->insert_id;
         $_SESSION['email'] = $email;
+        $_SESSION['user_name'] = $fullname;
+        $_SESSION['card_id'] = $card_id;
         session_regenerate_id(true);
 
         $response = ['success' => true];

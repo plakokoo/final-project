@@ -1,4 +1,5 @@
 <?php
+session_set_cookie_params(0, '/');
 session_start();
 
 header('Content-Type: application/json');
@@ -47,7 +48,7 @@ try {
     $conn->query("SET time_zone = '+00:00'");
 
     $stmt = $conn->prepare("
-        SELECT id, email, password_hash,
+        SELECT id, name, email, password_hash, card_id,
                failed_login_attempts, last_failed_login
         FROM users
         WHERE email = ?
@@ -123,6 +124,8 @@ try {
             session_regenerate_id(true);
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['email'] = $user['email'];
+            $_SESSION['user_name'] = $user['name'];
+            $_SESSION['card_id'] = $user['card_id'];
 
             echo json_encode(['success' => true]);
             exit();

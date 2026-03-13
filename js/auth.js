@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await response.json();
 
       if (result.success) {
-        window.location.href = "/Finals/pages/index.php";
+        window.location.replace("/Finals/pages/index.php");
         return;
       }
 
