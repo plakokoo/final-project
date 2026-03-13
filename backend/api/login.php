@@ -48,13 +48,13 @@ try {
     $conn->query("SET time_zone = '+00:00'");
 
     $stmt = $conn->prepare("
-        SELECT id, name, email, password_hash, card_id,
+        SELECT id, name, email, password_hash, card_id, role,
                failed_login_attempts, last_failed_login
         FROM users
-        WHERE email = ?
+        WHERE email = ? OR name = ?
         LIMIT 1
     ");
-    $stmt->bind_param("s", $email);
+    $stmt->bind_param("ss", $email, $email);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -126,8 +126,9 @@ try {
             $_SESSION['email'] = $user['email'];
             $_SESSION['user_name'] = $user['name'];
             $_SESSION['card_id'] = $user['card_id'];
+            $_SESSION['role'] = $user['role'];
 
-            echo json_encode(['success' => true]);
+            echo json_encode(['success' => true, 'role' => $user['role']]);
             exit();
 
         } else {

@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const savedUsername = localStorage.getItem("username");
   const savedCheckBox = localStorage.getItem("checkbox");
 
-  if (savedCheckBox == "true" && savedUsername) {
+  if (savedCheckBox === "true" && savedUsername) {
     rmCheck.checked = true;
     emailInput.value = savedUsername;
   } else {
@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const submitBtn = document.querySelector("#submitBtn");
   const errorMsg = document.querySelector("#error-message");
+
+  const originalBtn = submitBtn.textContent;
   let lockoutTimer = null;
 
   function formatTime(seconds) {
@@ -59,7 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await response.json();
 
       if (result.success) {
-        window.location.replace("/Finals/pages/index.php");
+        if(result.role === 'admin') {
+          window.location.replace("/Finals/pages/adminDashboard.php");
+        } else {
+          window.location.replace("/Finals/pages/index.php");
+          
+        }
         return;
       }
 
@@ -79,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (time <= 0) {
             clearInterval(lockoutTimer);
             submitBtn.disabled = false;
-            submitBtn.textContent = "SIGN IN";
+            submitBtn.textContent = originalBtn;
             errorMsg.style.display = "none";
           } else {
             submitBtn.textContent = `Locked (${formatTime(time)})`;
@@ -92,12 +99,12 @@ document.addEventListener("DOMContentLoaded", () => {
       errorMsg.textContent = result.message || "Login failed";
       errorMsg.style.display = "block";
       submitBtn.disabled = false;
-      submitBtn.textContent = "SIGN IN";
+      submitBtn.textContent = originalBtn;
     } catch (error) {
       errorMsg.textContent = error.message;
       errorMsg.style.display = "block";
       submitBtn.disabled = false;
-      submitBtn.textContent = "SIGN IN";
+      submitBtn.textContent = originalBtn;
     }
   });
 });

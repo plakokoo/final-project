@@ -63,6 +63,30 @@ h2 {
   text-align: left;
 }
 
+.form-section {
+  position: relative; /* required for absolute positioning */
+}
+
+.form-tooltip {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 28px;
+  height: 28px;
+  background-color: #6c757d;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.form-tooltip i {
+  line-height: 1;
+}
+
 @media (max-width: 768px) {
   .auth-container {
     flex-direction: column;
